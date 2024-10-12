@@ -1,4 +1,4 @@
-name: ⏱️ Verify
+name: ⏱️ Verify UI
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -14,21 +14,19 @@ jobs:
   quality-check:
     name: 🔦 Pipeline QA
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ui
 
     steps:
-      - name: Checkout code
+      - name: 🎠 Checkout code
         uses: actions/checkout@v4
 
       - name: 🎺 Prepare - Set up Node.js
         uses: actions/setup-node@v4
 
-      - name: 💻 Install Node.js dependencies - UI
+      - name: 💻 Install Node.js dependencies
         run: npm i
-        working-directory: ui
-
-      - name: 💻 Install Node.js dependencies - Backend
-        run: npm i
-        working-directory: backend
 
       - name: 📐 Action - Check ESLint
         run: npm run lint
