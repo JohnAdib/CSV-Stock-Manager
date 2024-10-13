@@ -58,9 +58,6 @@ jobs:
           overwrite: true
 
       # Upload to GitHub Pages
-      - name: 📂 Copy README to GitHub Pages root
-        run: cp README.md ./gh-pages-root/
-
       - name: 📂 Upload Backend Coverage to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -75,9 +72,12 @@ jobs:
           publish_dir: ./ui/coverage
           destination_dir: ui
 
+      - name: 📂 Copy README to GitHub Pages root
+        run: cp README.md ./
+
       - name: 📂 Upload README to GitHub Pages root
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./gh-pages-root
+          publish_dir: .
           destination_dir: .
