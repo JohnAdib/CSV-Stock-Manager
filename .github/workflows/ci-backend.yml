@@ -47,6 +47,7 @@ jobs:
         run: npm run coverage
 
       - name: 📂 Upload Coverage Report
+        if: matrix.node == 20
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
@@ -54,6 +55,7 @@ jobs:
           overwrite: true
 
       - name: 📂 Upload to GitHub Pages
+        if: matrix.node == 20
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
