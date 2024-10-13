@@ -43,20 +43,14 @@ jobs:
       - name: 🧪 Tests - Run Unit Tests
         run: npm run coverage
 
-      - name: List coverage directory
-        run: ls -la ./
-
-      - name: List coverage directory backend
-        run: ls -la ./coverage/
-
-      - name: 📂 Upload Coverage Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: coverage/
-
       - name: 📂 Upload Coverage Report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: backend/coverage/
+
+      - name: 📂 Upload to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public/backend/coverage_${{ matrix.node }}/
