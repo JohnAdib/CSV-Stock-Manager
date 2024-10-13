@@ -73,7 +73,7 @@ export function StockTable({ stockItems }: IStockTable) {
                           href={'/stock/' + item.id}
                           className="text-sky-600 hover:text-sky-900 dark:text-sky-400 dark:hover:text-sky-600"
                         >
-                          View Profile
+                          Edit Item
                           <span className="sr-only">, {item.id}</span>
                         </Link>
                       </td>

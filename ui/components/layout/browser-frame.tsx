@@ -1,6 +1,6 @@
-import CodeMirror from '@uiw/react-codemirror'
-import { dracula } from '@uiw/codemirror-theme-dracula'
 import { json } from '@codemirror/lang-json'
+import { dracula } from '@uiw/codemirror-theme-dracula'
+import CodeMirror from '@uiw/react-codemirror'
 
 interface IBrowserFrame {
   children: React.ReactNode
