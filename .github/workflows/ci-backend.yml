@@ -48,6 +48,7 @@ jobs:
         with:
           name: coverage-report
           path: backend/coverage/
+          overwrite: true
 
       - name: 📂 Upload to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
