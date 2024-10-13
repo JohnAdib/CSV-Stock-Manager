@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Inventory {
+model Stock {
   id          Int      @id @default(autoincrement())
   quantity    Int
   sku         String   @unique

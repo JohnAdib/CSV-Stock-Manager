@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "Inventory" (
+CREATE TABLE "Stock" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "quantity" INTEGER NOT NULL,
     "sku" TEXT NOT NULL,
@@ -21,16 +21,16 @@ CREATE TABLE "CsvFileLog" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Inventory_sku_key" ON "Inventory"("sku");
+CREATE UNIQUE INDEX "Stock_sku_key" ON "Stock"("sku");
 
 -- CreateIndex
-CREATE INDEX "Inventory_quantity_idx" ON "Inventory"("quantity");
+CREATE INDEX "Stock_quantity_idx" ON "Stock"("quantity");
 
 -- CreateIndex
-CREATE INDEX "Inventory_store_idx" ON "Inventory"("store");
+CREATE INDEX "Stock_store_idx" ON "Stock"("store");
 
 -- CreateIndex
-CREATE INDEX "Inventory_quantity_store_idx" ON "Inventory"("quantity", "store");
+CREATE INDEX "Stock_quantity_store_idx" ON "Stock"("quantity", "store");
 
 -- CreateIndex
 CREATE INDEX "CsvFileLog_uploadedAt_idx" ON "CsvFileLog"("uploadedAt");
