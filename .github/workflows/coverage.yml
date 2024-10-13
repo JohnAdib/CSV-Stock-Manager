@@ -1,4 +1,4 @@
-name: 📊 Coverage Workflow
+name: 📊 Coverage
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -11,8 +11,8 @@ permissions:
   contents: write
 
 jobs:
-  coverage-pipeline:
-    name: 👌 Coverage Pipeline
+  coverage-report-pipeline:
+    name: 🔍 Report
     runs-on: ubuntu-latest
 
     steps:
