@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { logger } from '../logger/index.js'
+import { logger } from '../../logger/index.js'
 
 export async function connectToMongoDb(
   dbUri: string | undefined

@@ -8,7 +8,7 @@ const port = process.env.PORT || 7011
 
 ;(async function main() {
   try {
-    await core.database.connectToPrismaDb()
+    await core.database.prisma.connectToPrismaDb()
     core.server.fireHappyServer({ port, apiEndpoints })
   } catch (error: unknown) {
     core.logger.error('Runtime exception', error)
