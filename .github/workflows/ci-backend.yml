@@ -10,12 +10,9 @@ on:
   # Trigger the workflow on pull request
   pull_request:
 
-permissions:
-  contents: write
-
 jobs:
   ci-pipeline:
-    name: 👌 CI v${{ matrix.node }}
+    name: 👌 CI - Node ${{ matrix.node }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -53,10 +50,3 @@ jobs:
           name: coverage-report
           path: backend/coverage/
           overwrite: true
-
-      - name: 📂 Upload to GitHub Pages
-        if: matrix.node == 20
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./backend/coverage

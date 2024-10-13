@@ -1,0 +1,71 @@
+name: 📊 Coverage Workflow
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+  # Trigger the workflow on push to the main
+  push:
+
+permissions:
+  contents: write
+
+jobs:
+  coverage-pipeline:
+    name: 👌 Coverage Pipeline
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🎠 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🎺 Prepare - Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # Backend Coverage
+      - name: 💻 Install Backend Dependencies
+        run: npm ci
+        working-directory: ./backend
+
+      - name: 🧪 Run Backend Tests and Generate Coverage
+        run: npm run coverage
+        working-directory: ./backend
+
+      - name: 📂 Upload Backend Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-coverage-report
+          path: ./backend/coverage/
+          overwrite: true
+
+      # UI Coverage
+      - name: 💻 Install UI Dependencies
+        run: npm ci
+        working-directory: ./ui
+
+      - name: 🧪 Run UI Tests and Generate Coverage
+        run: npm run test -- --coverage
+        working-directory: ./ui
+
+      - name: 📂 Upload UI Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-coverage-report
+          path: ./ui/coverage/
+          overwrite: true
+
+      # Optionally: Upload to GitHub Pages
+      - name: 📂 Upload Backend Coverage to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./backend/coverage
+
+      - name: 📂 Upload UI Coverage to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./ui/coverage
