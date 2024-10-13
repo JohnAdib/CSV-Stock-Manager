@@ -1,20 +1,7 @@
 import type { NextFunction, Request, Response } from 'express'
 import { logger } from '../logger/index.js'
-
-const getStatusEmoji = (statusCode: number): string => {
-  if (statusCode >= 100 && statusCode < 200) {
-    return '🟣'
-  } else if (statusCode >= 200 && statusCode < 300) {
-    return '✅'
-  } else if (statusCode >= 300 && statusCode < 400) {
-    return '🔀'
-  } else if (statusCode >= 400 && statusCode < 500) {
-    return '🟡'
-  } else if (statusCode >= 500) {
-    return '🆘'
-  }
-  return '💯'
-}
+import { mapStatusToDetailEmoji } from './map-status-to-detail-emoji.js'
+import { mapStatusToEmoji } from './map-status-to-emoji.js'
 
 export const logRequests = (
   req: Request,
@@ -38,13 +25,14 @@ export const logRequests = (
       const colorCyan = '\x1b[36m'
 
       // message
-      const statusEmoji = getStatusEmoji(res.statusCode)
+      const statusEmoji = mapStatusToEmoji(res.statusCode)
       const statusCode = colorBlue + res.statusCode + colorReset
+      const statusDetailEmoji = mapStatusToDetailEmoji(res.statusCode)
       const reqMethod = colorBright + req.method + colorReset
       const responseTime = colorDim + reqDuration + colorReset
       const reqUrl = colorCyan + req.originalUrl + colorReset
 
-      const logMsg = `${statusEmoji} ${statusCode} ${reqMethod} ${responseTime} ${reqUrl}`
+      const logMsg = `${statusEmoji} ${statusCode} ${statusDetailEmoji} ${reqMethod} ${responseTime} ${reqUrl}`
 
       logger.info(logMsg, {
         ip: req.ip
