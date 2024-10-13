@@ -44,13 +44,13 @@ jobs:
         run: npm run coverage
 
       - name: List coverage directory
-        run: ls -l ./
+        run: ls -la ./
 
       - name: List coverage directory backend
-        run: ls -l ./coverage/
+        run: ls -la ./coverage/
 
       - name: 📂 Upload Coverage Report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: ./coverage
+          path: ./coverage/**
