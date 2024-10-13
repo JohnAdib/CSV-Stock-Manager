@@ -19,10 +19,7 @@
     "forceConsistentCasingInFileNames": true,
     "jsx": "preserve",
     "incremental": true,
-    "outDir": "./dist",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "outDir": "./dist"
   },
   "include": ["**/*.ts", "**/*.mts"],
   "exclude": ["node_modules", "**/dist"]
