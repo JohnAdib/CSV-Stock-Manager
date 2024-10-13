@@ -63,18 +63,18 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./backend/coverage
-          destination_dir: backend
+          destination_dir: coverage/backend
 
       - name: 📂 Upload UI Coverage to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./ui/coverage
-          destination_dir: ui
+          destination_dir: coverage/ui
 
       - name: 📂 Upload README to GitHub Pages root
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
+          publish_dir: ./public
           destination_dir: .
