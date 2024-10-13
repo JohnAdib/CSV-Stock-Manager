@@ -44,7 +44,7 @@ jobs:
         run: npm run coverage
 
       - name: List coverage directory
-        run: ls -l backend/coverage/
+        run: ls -l ./
 
       - name: List coverage directory backend
         run: ls -l ./backend/
