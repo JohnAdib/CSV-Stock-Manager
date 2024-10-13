@@ -11,7 +11,8 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
-    "test": "vitest"
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
@@ -23,8 +24,8 @@
     "supertest": "^7.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "vitest": "^1.6.0",
-    "winston": "^3.13.0",
+    "vitest": "^2.1.2",
+    "winston": "^3.15.0",
     "xss": "^1.0.15"
   },
   "devDependencies": {
@@ -35,6 +36,7 @@
     "@types/supertest": "^6.0.2",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
+    "@vitest/coverage-v8": "^2.1.2",
     "eslint": "^9.12.0",
     "globals": "^15.11.0",
     "nodemon": "^3.1.2",

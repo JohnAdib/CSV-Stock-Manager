@@ -12,7 +12,7 @@ on:
 
 jobs:
   ci-pipeline:
-    name: 🔦 CI Pipeline - Node ${{ matrix.node }}
+    name: 👌 CI v${{ matrix.node }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,20 +25,20 @@ jobs:
       - name: 🎠 Checkout code
         uses: actions/checkout@v4
 
-      - name: 🎺 Prepare - Set up Node.js
+      - name: 🎺 Prepare - Set up Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           cache: 'npm'
 
       - name: 💻 Install Node.js dependencies
-        run: npm i
+        run: npm ci
 
-      - name: 📐 Action - Check ESLint
+      - name: 📐 ESLint - Code Linting
         run: npm run lint
 
-      - name: 🏗️ Action - Build
+      - name: 🏗️ Build - Compile Code
         run: npm run build
 
-      - name: 🧪 Action - Unit Test
+      - name: 🧪 Tests - Run Unit Tests
         run: npm run test
