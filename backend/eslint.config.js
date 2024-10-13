@@ -1,4 +1,5 @@
 import pluginJs from '@eslint/js'
+import importPlugin from 'eslint-plugin-import'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
@@ -14,5 +15,19 @@ export default [
   },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
-  ...tseslint.configs.recommended
+  ...tseslint.configs.recommended,
+  {
+    plugins: { import: importPlugin },
+    rules: {
+      'import/extensions': [
+        'error',
+        'ignorePackages',
+        {
+          js: 'always',
+          ts: 'never',
+          tsx: 'never'
+        }
+      ]
+    }
+  }
 ]
