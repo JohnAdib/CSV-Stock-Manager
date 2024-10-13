@@ -1,4 +1,4 @@
-import { core } from 'src/core/index.js'
+import { core } from '../../../../../core/index.js'
 import { IStockItemDb } from '../../../interfaces/index.js'
 
 interface IGetStockItemsParams {

@@ -1,4 +1,4 @@
-import { core } from 'src/core/index.js'
+import { core } from '../../../../core/index.js'
 import { ICsvFileAdd } from '../../interfaces/index.js'
 
 export const addCsvFile = async ({
