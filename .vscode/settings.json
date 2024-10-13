@@ -8,6 +8,8 @@
     "**/dist": true,
     "**/logs": true,
     ".turbo": true,
+    "**/.next": true,
+    "**/coverage": true,
     ".vscode": true,
     "**/node_modules": true
   },
