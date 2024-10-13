@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Inventory {
+  id          Int      @id @default(autoincrement())
+  quantity    Int
+  sku         String   @unique
+  description String?
+  store       String
+
+  @@index([quantity])
+  @@index([store])
+  @@index([quantity, store])
+}
+
+model CsvFileLog {
+  id           Int      @id @default(autoincrement())
+  fileName     String
+  fileSize     Int
+  uploadedAt   DateTime @default(now())
+  totalRecords Int
+  successCount Int
+  ignoredCount Int
+  failedCount  Int
+  // status: 'UPLOADED' | 'PROCESSING' | 'SUCCESS' | 'PARTIAL' | 'FAILED'
+  // SQLLite does not support ENUM, so we use String instead and validate the value in the app
+  status       String
+
+  @@index([uploadedAt])
+  @@index([status])
+}
