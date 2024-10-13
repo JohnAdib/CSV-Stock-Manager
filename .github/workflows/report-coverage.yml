@@ -72,6 +72,9 @@ jobs:
           publish_dir: ./ui/coverage
           destination_dir: coverage/ui
 
+      - name: 📂 Copy README.md to index.md
+        run: cp README.md index.md
+
       - name: 📂 Upload README to GitHub Pages root
         uses: peaceiris/actions-gh-pages@v4
         with:
