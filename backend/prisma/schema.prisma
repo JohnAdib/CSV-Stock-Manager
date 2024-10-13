@@ -34,4 +34,7 @@ model CsvFileLog {
   // status: 'UPLOADED' | 'PROCESSING' | 'SUCCESS' | 'PARTIAL' | 'FAILED'
   // SQLLite does not support ENUM, so we use String instead and validate the value in the app
   status       String
+
+  @@index([uploadedAt])
+  @@index([status])
 }

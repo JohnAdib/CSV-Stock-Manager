@@ -11,8 +11,8 @@ on:
   pull_request:
 
 jobs:
-  quality-check:
-    name: 🔦 Pipeline QA
+  ci-pipeline:
+    name: 🔦 CI Pipeline
     runs-on: ubuntu-latest
     defaults:
       run:

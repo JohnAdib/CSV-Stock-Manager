@@ -22,3 +22,6 @@ npm-debug.log
 .DS_Store
 
 .env
+
+# SQLite database file
+prisma/db
