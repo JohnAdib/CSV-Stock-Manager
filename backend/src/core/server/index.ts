@@ -1,1 +1,5 @@
-export { fireHappyServer } from './fire.js'
+import { fireHappyServer } from './fire.js'
+
+export const server = {
+  fireHappyServer
+}
