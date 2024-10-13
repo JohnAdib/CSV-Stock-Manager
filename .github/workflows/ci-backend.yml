@@ -43,6 +43,12 @@ jobs:
       - name: 🧪 Tests - Run Unit Tests
         run: npm run coverage
 
+      - name: List coverage directory
+        run: ls -l ./
+
+      - name: List coverage directory backend
+        run: ls -l ./coverage/
+
       - name: 📂 Upload Coverage Report
         uses: actions/upload-artifact@v4
         with:
