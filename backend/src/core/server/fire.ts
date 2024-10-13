@@ -33,11 +33,11 @@ export function fireHappyServer({ port = 3000, apiEndpoints }: IServer): void {
   // try to start the server
   try {
     happyServer.listen(port, () => {
-      logger.info(`Server is dancing at http://localhost:${port} 💃`)
+      logger.info(`💃 Server is dancing at http://localhost:${port}`)
     })
   } catch (error) {
     // TODO: improve error handling to detect the error type
-    logger.error('Error on starting the server!', error)
+    logger.error('💥 Error on starting the server!', error)
     process.exit(1)
   }
 }
