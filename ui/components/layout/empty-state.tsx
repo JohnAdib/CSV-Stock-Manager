@@ -1,6 +1,5 @@
-import Link from 'next/link'
 import { PlusIcon } from '@heroicons/react/20/solid'
-import { title } from 'process'
+import Link from 'next/link'
 
 interface IEmptyStateProps {
   title: string

@@ -28,9 +28,9 @@ export function Header() {
           className="flex items-center justify-between p-6 lg:px-8"
         >
           <div className="flex lg:flex-1">
-            <Link href="/" className="-m-1.5 p-1.5">
+            <Link href="/" className="-m-1.5">
               <span className="sr-only">MrAdib</span>
-              <Image alt="Logo" src={logo} className="h-8 w-auto" />
+              <Image alt="Logo" src={logo} className="h-9 w-auto" />
             </Link>
           </div>
           <div className="flex lg:hidden">

@@ -5,23 +5,24 @@ import { Loading } from '@components/layout/loading'
 import { PageHeader } from '@components/layout/page-header'
 import { Pagination } from '@components/layout/pagination'
 import { StockTable } from '@components/stock/stock-table'
-import { useSearchParams } from 'next/navigation'
+// import { useSearchParams } from 'next/navigation'
 
 export default function Page() {
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
 
-  const searchParamPage = searchParams.get('page')
-    ? parseInt(searchParams.get('page') as string, 10)
-    : 1
+  // const searchParamPage = searchParams.get('page')
+  //   ? parseInt(searchParams.get('page') as string, 10)
+  //   : 1
 
-  // TODO: Make this configurable and move it to ENV
-  // For now, we will hardcode it to 2 to keep it simple and test the pagination
-  const defaultPerPage = 2
-  const searchParamLimit = searchParams.get('limit')
-    ? parseInt(searchParams.get('limit') as string, 10)
-    : defaultPerPage
+  // // TODO: Make this configurable and move it to ENV
+  // // For now, we will hardcode it to 2 to keep it simple and test the pagination
+  // const defaultPerPage = 2
+  // const searchParamLimit = searchParams.get('limit')
+  //   ? parseInt(searchParams.get('limit') as string, 10)
+  //   : defaultPerPage
 
-  const data = null
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const data: any = null
 
   if (data === undefined) {
     return <Loading />
@@ -47,7 +48,7 @@ export default function Page() {
         btnColor="sky"
         btnHref="/stock/add"
       />
-      <StockTable stock={datastock.result} />
+      <StockTable stockItems={data.result} />
       <Pagination
         currentPage={data?.meta?.currentPage}
         totalResults={data?.meta?.totalItems}
