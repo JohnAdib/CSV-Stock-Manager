@@ -1,5 +1,5 @@
 import { core } from 'src/core/index.js'
-import { IStockItemDb } from '../interfaces/i-stock-item-db.js'
+import { IStockItemDb } from '../../../interfaces/index.js'
 
 interface IGetStockItemBySkyParams {
   sku: string
