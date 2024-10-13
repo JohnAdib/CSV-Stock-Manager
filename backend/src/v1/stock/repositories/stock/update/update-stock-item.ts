@@ -1,4 +1,4 @@
-import { core } from 'src/core/index.js'
+import { core } from '../../../../../core/index.js'
 import { IStockItemAdd } from '../../../interfaces/index.js'
 
 interface IUpdateStockItemFullParams extends IStockItemAdd {

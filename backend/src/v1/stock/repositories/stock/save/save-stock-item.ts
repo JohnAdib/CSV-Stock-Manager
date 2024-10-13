@@ -1,4 +1,4 @@
-import { core } from 'src/core/index.js'
+import { core } from '../../../../../core/index.js'
 import { IStockItemAdd, IStockItemDb } from '../../../interfaces/index.js'
 
 export const saveStockItem = async ({

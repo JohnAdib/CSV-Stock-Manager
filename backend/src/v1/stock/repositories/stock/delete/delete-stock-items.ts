@@ -1,4 +1,4 @@
-import { core } from 'src/core/index.js'
+import { core } from '../../../../../core/index.js'
 
 export const deleteAllStockItems = async (): Promise<void> => {
   const prisma = core.database.prisma.getPrismaInstance()
