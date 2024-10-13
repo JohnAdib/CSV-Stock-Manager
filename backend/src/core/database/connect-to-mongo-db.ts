@@ -15,7 +15,7 @@ export async function connectToMongoDb(
     .then(() => {
       logger.info('Connected to Db! Warm up the dance floor!')
     })
-    .catch((error: any) => {
+    .catch((error: unknown) => {
       logger.error('Error connecting to MongoDB! 💥', error)
       process.exit(1)
     })

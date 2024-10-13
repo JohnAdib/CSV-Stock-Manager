@@ -5,7 +5,7 @@ export class Conflict extends Error {
 
   public meta: IResponseJsonMeta | undefined
 
-  public result: any
+  public result: unknown
 
   constructor(msg: string) {
     super(msg)

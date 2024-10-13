@@ -5,7 +5,7 @@ export class NotFound extends Error {
 
   public meta: IResponseJsonMeta | undefined
 
-  public result: any
+  public result: unknown
 
   constructor(msg: string) {
     super(msg)
@@ -26,7 +26,7 @@ export class NotFound extends Error {
   /**
    * @description Set the custom result for the error
    */
-  setResult(_result: any) {
+  setResult(_result: unknown) {
     this.result = _result
     return this
   }

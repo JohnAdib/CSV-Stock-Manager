@@ -1,15 +1,26 @@
 import type { IResponseJsonMeta } from '../interfaces/index.js'
 
+interface IErrorMsg {
+  message: string
+  name: string
+  errors: {
+    title: {
+      kind: string
+      path: string
+    }
+  }
+}
+
 export class Database extends Error {
   public statusCode: number
 
-  public result: any
+  public result: unknown
 
   public meta: IResponseJsonMeta | undefined
 
   public errPath: string = 'database'
 
-  constructor(msg: any) {
+  constructor(msg: IErrorMsg) {
     super(msg.message)
     this.name = msg.name
     this.result = undefined
