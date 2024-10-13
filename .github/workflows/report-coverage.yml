@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: backend-coverage-report
-          path: ./backend/coverage/
+          path: backend/coverage/
           overwrite: true
 
       # UI Coverage
@@ -54,18 +54,30 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ui-coverage-report
-          path: ./ui/coverage/
+          path: ui/coverage/
           overwrite: true
 
-      # Optionally: Upload to GitHub Pages
+      # Upload to GitHub Pages
+      - name: 📂 Copy README to GitHub Pages root
+        run: cp README.md ./gh-pages-root/
+
       - name: 📂 Upload Backend Coverage to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./backend/coverage
+          destination_dir: backend
 
       - name: 📂 Upload UI Coverage to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./ui/coverage
+          destination_dir: ui
+
+      - name: 📂 Upload README to GitHub Pages root
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./gh-pages-root
+          destination_dir: .
