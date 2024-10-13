@@ -1,28 +1,34 @@
-import { PrismaClient } from '@prisma/client'
-import { IStockItem } from '../interfaces/i-stock-item'
-
-const prisma = new PrismaClient()
-
-interface SaveStockItemParams {
-  item: IStockItem
-}
+import { core } from 'src/core/index.js'
+import { IStockItemAdd } from '../interfaces/i-stock-item-add.js'
+import { IStockItemDb } from '../interfaces/i-stock-item-db.js'
 
 export const saveStockItem = async ({
-  item
-}: SaveStockItemParams): Promise<void> => {
+  sku,
+  quantity,
+  store,
+  description,
+  csvFileId
+}: IStockItemAdd): Promise<IStockItemDb> => {
+  const prismaInstance = await core.database.prisma.getPrismaInstance()
   try {
-    await prisma.stock.create({
-      data: {
-        sku: item.sku,
-        quantity: item.quantity,
-        store: item.store,
-        description: item.description || null
+    const result = await prismaInstance.stock.upsert({
+      where: { sku },
+      update: {
+        quantity,
+        store,
+        description,
+        csvFileId
+      },
+      create: {
+        sku,
+        quantity,
+        store,
+        description,
+        csvFileId
       }
     })
-  } catch (error) {
-    // const logMsg = `Error saving stock item with SKU ${item.sku}`
-    // console.error(logMsg, error)
-    // throw new Error(logMsg)
-    // throw new error.client.Database(err)
+    return result
+  } catch (error: unknown) {
+    throw new core.error.client.Database(error)
   }
 }

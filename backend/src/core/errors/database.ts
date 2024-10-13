@@ -20,7 +20,8 @@ export class Database extends Error {
 
   public errPath: string = 'database'
 
-  constructor(msg: IErrorMsg) {
+  constructor(_msg: unknown) {
+    const msg = _msg as IErrorMsg
     super(msg.message)
     this.name = msg.name
     this.result = undefined

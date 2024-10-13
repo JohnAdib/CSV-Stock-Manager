@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { logger } from '../logger/index.js'
+import { logger } from '../../logger/index.js'
 
 let prisma: PrismaClient | null = null
 

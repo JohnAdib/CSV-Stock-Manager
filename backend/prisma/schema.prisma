@@ -19,6 +19,9 @@ model Stock {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  csvFileId   Int?
+  csvFileLog  CsvFileLog? @relation(fields: [csvFileId], references: [id], onDelete: SetNull)
+
   @@index([quantity])
   @@index([store])
   @@index([quantity, store])
@@ -32,11 +35,13 @@ model CsvFileLog {
   updatedAt   DateTime @updatedAt
   totalRecords Int
   successCount Int
-  ignoredCount Int
-  failedCount  Int
+  invalidCount Int
+  upsertFailedCount  Int
   // status: 'UPLOADED' | 'PROCESSING' | 'SUCCESS' | 'PARTIAL' | 'FAILED'
   // SQLLite does not support ENUM, so we use String instead and validate the value in the app
   status       String
+
+  stocks       Stock[]
 
   @@index([status])
 }

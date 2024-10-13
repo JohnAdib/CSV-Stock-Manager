@@ -1,8 +1,12 @@
-import { connectToMongoDb } from './connect-to-mongo-db.js'
-import { connectToPrismaDb, getPrismaInstance } from './connect-to-prisma-db.js'
+import { connectToMongoDb } from './mongoose/index.js'
+import { connectToPrismaDb, getPrismaInstance } from './prisma/index.js'
 
 export const database = {
-  connectToMongoDb,
-  connectToPrismaDb,
-  getPrismaInstance
+  prisma: {
+    connectToPrismaDb,
+    getPrismaInstance
+  },
+  mongoose: {
+    connectToMongoDb
+  }
 }
