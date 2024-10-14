@@ -4,11 +4,9 @@ import { ICsvFileAdd } from '../../interfaces/index.js'
 export const addCsvFile = async ({
   fileName,
   fileSize,
-  totalRecords,
-  successCount,
-  invalidCount,
-  upsertFailedCount,
-  status
+  totalItems,
+  validItemsCount,
+  invalidItemsCount
 }: ICsvFileAdd): Promise<number> => {
   const prisma = core.database.prisma.getPrismaInstance()
 
@@ -17,11 +15,9 @@ export const addCsvFile = async ({
       data: {
         fileName,
         fileSize,
-        totalRecords,
-        successCount,
-        invalidCount,
-        upsertFailedCount,
-        status
+        totalItems,
+        validItemsCount,
+        invalidItemsCount
       }
     })
 
