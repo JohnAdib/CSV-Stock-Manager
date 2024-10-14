@@ -2,18 +2,20 @@ import { core } from '../../../../../core/index.js'
 import { IStockItemDb } from '../../../interfaces/index.js'
 
 interface IGetStockItemsParams {
-  skip?: number
-  take?: number
+  page?: number
+  perPage?: number
   orderBy?: keyof IStockItemDb
   orderDirection?: 'asc' | 'desc'
 }
 
 export const getStockItems = async ({
-  skip = 0,
-  take = 10,
+  page = 0,
+  perPage = 10,
   orderBy,
   orderDirection
 }: IGetStockItemsParams): Promise<IStockItemDb[]> => {
+  const skip = (page - 1) * perPage
+
   const prisma = core.database.prisma.getPrismaInstance()
 
   const orderClause =
@@ -22,7 +24,7 @@ export const getStockItems = async ({
   try {
     const stockItems = await prisma.stock.findMany({
       skip,
-      take,
+      take: perPage,
       orderBy: orderClause
     })
 
