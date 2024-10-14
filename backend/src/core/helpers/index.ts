@@ -1,4 +1,4 @@
-import { paginate } from './paginate/paginate.js'
+import { paginate } from './paginate/index.js'
 
 export const helpers = {
   paginate
