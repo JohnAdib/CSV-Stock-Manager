@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon",
+    "dev": "prisma generate && prisma migrate dev && nodemon",
     "lint": "eslint .",
     "start": "node dist/index.js",
     "prisma:pull": "prisma db pull",

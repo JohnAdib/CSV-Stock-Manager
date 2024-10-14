@@ -2,16 +2,18 @@ import { z } from 'zod'
 
 export const validation = z
   .object({
-    skip: z
+    page: z
       .string()
       .optional()
-      .transform((val) => (val ? parseInt(val) : 0))
-      .refine((val) => val >= 0, { message: 'Skip must be a positive number' }),
+      .transform((val) => (val ? parseInt(val) : 1))
+      .refine((val) => val >= 1, { message: 'Page must be a positive number' }),
 
-    take: z
+    perPage: z
       .string()
       .optional()
       .transform((val) => (val ? parseInt(val) : 10))
-      .refine((val) => val > 0, { message: 'Take must be a positive number' })
+      .refine((val) => val > 0, {
+        message: 'PerPage must be a positive number'
+      })
   })
   .strict()

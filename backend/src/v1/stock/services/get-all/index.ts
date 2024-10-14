@@ -1,14 +1,27 @@
+import { core, IServiceResult } from '../../../../core/index.js'
+import { IStockItemDb } from '../../interfaces/i-stock-item-db.js'
 import { v1StockRepository } from '../../repositories/index.js'
 
 interface IServiceGetAll {
-  skip: number
-  take: number
+  page: number
+  perPage: number
 }
 
-export async function getAll({ skip, take }: IServiceGetAll) {
-  const stockItems = await v1StockRepository.stock.read.getStockItems({
-    skip,
-    take
+export async function getAll({
+  page,
+  perPage
+}: IServiceGetAll): Promise<IServiceResult<IStockItemDb>> {
+  const dbData = await v1StockRepository.stock.read.getStockItems({
+    page,
+    perPage
   })
-  return stockItems
+
+  const apiResponse: IServiceResult<IStockItemDb> = core.helpers.paginate({
+    data: dbData,
+    totalCount: dbData.length,
+    currentPage: page,
+    perPage
+  })
+
+  return apiResponse
 }
