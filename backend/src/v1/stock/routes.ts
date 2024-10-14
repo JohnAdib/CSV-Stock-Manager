@@ -4,9 +4,18 @@ import { v1StockController } from './controllers/index.js'
 
 export const apiV1StockRoutes: Router = Router()
 
-apiV1StockRoutes.post('/upload', (_req: Request, res: Response) => {
-  res.status(200).json(core.response.responseApiSample)
+const csvUploadMiddleware = core.middleware.fileUpload({
+  allowedExtensions: ['csv'],
+  maxFileSizeMB: 5,
+  fieldName: 'csv',
+  destinationPath: 'uploads/'
 })
+
+apiV1StockRoutes.post(
+  '/upload',
+  csvUploadMiddleware,
+  core.middleware.asyncHandler(v1StockController.uploadCsv)
+)
 
 apiV1StockRoutes.get(
   '/',
