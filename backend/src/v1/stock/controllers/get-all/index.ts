@@ -18,7 +18,7 @@ export async function getAllController(
     statusCode: 200
   }
 
-  if (serviceResult.data.length === 0) {
+  if (serviceResult.data?.length === 0) {
     apiResponse.messages = [
       {
         type: 'info',

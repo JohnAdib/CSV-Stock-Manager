@@ -1,9 +1,5 @@
 import { core } from '../../../../../core/index.js'
-import { IStockItemAdd } from '../../../interfaces/index.js'
-
-interface IUpdateStockItemFullParams extends IStockItemAdd {
-  id: number
-}
+import { IStockItemUpdate } from '../../../interfaces/index.js'
 
 export const updateStockItem = async ({
   id,
@@ -11,7 +7,7 @@ export const updateStockItem = async ({
   quantity,
   store,
   description
-}: IUpdateStockItemFullParams): Promise<void> => {
+}: IStockItemUpdate): Promise<IStockItemUpdate> => {
   const prisma = core.database.prisma.getPrismaInstance()
 
   try {
@@ -28,6 +24,7 @@ export const updateStockItem = async ({
     if (!updatedItem) {
       throw new core.error.client.NotFound(`Stock item with id ${id} not found`)
     }
+    return updatedItem
   } catch (error: unknown) {
     throw new core.error.client.Database(error)
   }
