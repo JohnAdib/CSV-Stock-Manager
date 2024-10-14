@@ -1,20 +1,39 @@
+import { csvParser } from '../../../core/helpers/csv-parser/index.js'
 import { IServiceResult } from '../../../core/index.js'
 import { IStockItemAdd } from '../interfaces/i-stock-item-add.js'
 import { IStockItemDb } from '../interfaces/i-stock-item-db.js'
 import { v1StockRepository } from '../repositories/index.js'
 
-interface IServiceSaveStockItem {
-  item: IStockItemAdd
-}
+export async function uploadCSV(
+  file: Express.Multer.File
+): Promise<IServiceResult<IStockItemDb>> {
+  const { originalname, size, path } = file
 
-export async function uploadCSV({
-  item
-}: IServiceSaveStockItem): Promise<IServiceResult<IStockItemDb>> {
-  const dbData: IStockItemDb =
-    await v1StockRepository.stock.save.saveStockItem(item)
+  console.log('file', path, originalname, size)
+
+  const { data, errors } = csvParser(path)
+
+  console.log('data', data)
+  console.log('errors', errors)
+
+  const dbData = await v1StockRepository.stock.save.saveStockItems(
+    data as IStockItemAdd[]
+  )
+
+  console.log('dbData', dbData)
+
+  await v1StockRepository.csv.addCsvFile({
+    fileName: originalname,
+    fileSize: size,
+    totalRecords: data.length,
+    successCount: data.length,
+    invalidCount: 0,
+    upsertFailedCount: 0,
+    status: 'success'
+  })
 
   const apiResponse: IServiceResult<IStockItemDb> = {
-    data: dbData
+    data: null
   }
 
   return apiResponse
