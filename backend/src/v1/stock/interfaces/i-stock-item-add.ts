@@ -3,5 +3,5 @@ export interface IStockItemAdd {
   quantity: number
   store: string
   description: string | null
-  csvFileId: number | null
+  csvFileId?: number | null
 }
