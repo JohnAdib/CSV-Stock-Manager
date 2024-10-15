@@ -9,9 +9,10 @@ export const updateStockItem = async ({
   description
 }: IStockItemUpdate): Promise<IStockItemUpdate> => {
   const prisma = core.database.prisma.getPrismaInstance()
+  let updatedItem = null
 
   try {
-    const updatedItem = await prisma.stock.update({
+    updatedItem = await prisma.stock.update({
       where: { id },
       data: {
         sku,
@@ -20,12 +21,13 @@ export const updateStockItem = async ({
         description
       }
     })
-
-    if (!updatedItem) {
-      throw new core.error.client.NotFound(`Stock item with id ${id} not found`)
-    }
-    return updatedItem
   } catch (error: unknown) {
     throw new core.error.client.Database(error)
   }
+
+  if (!updatedItem) {
+    throw new core.error.client.NotFound(`Stock item with id ${id} not found`)
+  }
+
+  return updatedItem
 }

@@ -1,6 +1,8 @@
 import type { NextFunction, Request, Response } from 'express'
+import { ZodError } from 'zod'
 import type { IError, IResponseJson } from '../interfaces/index.js'
 import { logger } from '../logger/index.js'
+import { handleZodError } from './zod-error-handling.js'
 
 export const errorHandling = (
   err: IError,
@@ -9,6 +11,10 @@ export const errorHandling = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _next: NextFunction
 ): void => {
+  if (err instanceof ZodError) {
+    return handleZodError(err, res)
+  }
+
   const defaultErrCode = 501
   const defaultErrTitle = 'Error (¬º-°)¬'
   const defaultErrMessage = 'Sorry, something went wrong!'

@@ -21,15 +21,16 @@ export const getStockItems = async ({
   const orderClause =
     orderBy && orderDirection ? { [orderBy]: orderDirection } : undefined
 
+  let stockItems = null
   try {
-    const stockItems = await prisma.stock.findMany({
+    stockItems = await prisma.stock.findMany({
       skip,
       take: perPage,
       orderBy: orderClause
     })
-
-    return stockItems as IStockItemDb[]
   } catch (error: unknown) {
     throw new core.error.client.Database(error)
   }
+
+  return stockItems as IStockItemDb[]
 }

@@ -26,9 +26,10 @@ apiV1StockRoutes.post('/', (_req: Request, res: Response) => {
   res.status(200).json(core.response.responseApiSample)
 })
 
-apiV1StockRoutes.get('/:id', (_req: Request, res: Response) => {
-  res.status(200).json(core.response.responseApiSample)
-})
+apiV1StockRoutes.get(
+  '/:id',
+  core.middleware.asyncHandler(v1StockController.getById)
+)
 
 apiV1StockRoutes.put('/:id', (_req: Request, res: Response) => {
   res.status(200).json(core.response.responseApiSample)
