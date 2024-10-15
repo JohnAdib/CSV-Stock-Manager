@@ -18,11 +18,9 @@ CREATE TABLE "CsvFileLog" (
     "fileSize" INTEGER NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL,
-    "totalRecords" INTEGER NOT NULL,
-    "successCount" INTEGER NOT NULL,
-    "invalidCount" INTEGER NOT NULL,
-    "upsertFailedCount" INTEGER NOT NULL,
-    "status" TEXT NOT NULL
+    "totalItems" INTEGER NOT NULL,
+    "validItemsCount" INTEGER NOT NULL,
+    "invalidItemsCount" INTEGER NOT NULL
 );
 
 -- CreateIndex
@@ -36,6 +34,3 @@ CREATE INDEX "Stock_store_idx" ON "Stock"("store");
 
 -- CreateIndex
 CREATE INDEX "Stock_quantity_store_idx" ON "Stock"("quantity", "store");
-
--- CreateIndex
-CREATE INDEX "CsvFileLog_status_idx" ON "CsvFileLog"("status");

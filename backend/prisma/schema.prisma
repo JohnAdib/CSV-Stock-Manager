@@ -33,15 +33,9 @@ model CsvFileLog {
   fileSize     Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  totalRecords Int
-  successCount Int
-  invalidCount Int
-  upsertFailedCount  Int
-  // status: 'UPLOADED' | 'PROCESSING' | 'SUCCESS' | 'PARTIAL' | 'FAILED'
-  // SQLLite does not support ENUM, so we use String instead and validate the value in the app
-  status       String
+  totalItems Int
+  validItemsCount Int
+  invalidItemsCount Int
 
   stocks       Stock[]
-
-  @@index([status])
 }
