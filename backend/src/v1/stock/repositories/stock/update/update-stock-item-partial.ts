@@ -13,22 +13,23 @@ export const updateStockItemPartial = async ({
   ...updateData
 }: IUpdateStockItemPartialParams): Promise<void> => {
   const prisma = core.database.prisma.getPrismaInstance()
+  let updatedItem = null
+
+  const filteredData = Object.fromEntries(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    Object.entries(updateData).filter(([_, value]) => value !== undefined)
+  )
 
   try {
-    const filteredData = Object.fromEntries(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      Object.entries(updateData).filter(([_, value]) => value !== undefined)
-    )
-
-    const updatedItem = await prisma.stock.update({
+    updatedItem = await prisma.stock.update({
       where: { id },
       data: filteredData
     })
-
-    if (!updatedItem) {
-      throw new core.error.client.NotFound(`Stock item with id ${id} not found`)
-    }
   } catch (error: unknown) {
     throw new core.error.client.Database(error)
+  }
+
+  if (!updatedItem) {
+    throw new core.error.client.NotFound(`Stock item with id ${id} not found`)
   }
 }
