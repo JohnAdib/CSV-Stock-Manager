@@ -2,13 +2,17 @@ import { IResponseJson } from '@/interfaces'
 import Swal from 'sweetalert2'
 
 interface IApiNotification {
-  apiRes: IResponseJson
+  apiResponse: IResponseJson | null
 }
 
-export function apiNotification({ apiRes }: IApiNotification): void {
+export function apiNotification({ apiResponse }: IApiNotification): void {
+  const notif = apiResponse?.notification
+  if (!notif) {
+    return
+  }
   Swal.fire({
-    title: apiRes.notification?.title,
-    text: apiRes.notification?.text,
-    icon: apiRes.notification?.type as 'error' | 'warning' | 'info' | 'success'
+    title: notif?.title,
+    text: notif?.text,
+    icon: notif?.type as 'error' | 'warning' | 'info' | 'success'
   })
 }
