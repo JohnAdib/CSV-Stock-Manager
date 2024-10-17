@@ -11,12 +11,16 @@ export async function deleteByIdController(
 
   const serviceResult = await v1StockServices.deleteStockItemById({ id })
 
-  const statusCode = 204
+  const statusCode = 200
   const apiResponse: IResponseJson = {
     okay: true,
+    statusCode: statusCode,
     result: serviceResult.data,
     meta: serviceResult.meta,
-    statusCode: statusCode
+    notification: {
+      text: 'Stock item ' + id + ' successfully deleted!',
+      type: 'success'
+    }
   }
 
   res.status(statusCode).json(apiResponse)

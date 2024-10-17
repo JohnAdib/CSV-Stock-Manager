@@ -11,6 +11,9 @@ export async function getAll({
   page,
   limit
 }: IServiceGetAll): Promise<IServiceResult<IStockItemDb>> {
+  const totalItemsCount =
+    await v1StockRepository.stock.read.getStockItemsCounts()
+
   const dbData: IStockItemDb[] =
     await v1StockRepository.stock.read.getStockItems({
       page,
@@ -19,7 +22,7 @@ export async function getAll({
 
   const apiResponse: IServiceResult<IStockItemDb> = core.helpers.paginate({
     data: dbData,
-    totalCount: dbData.length,
+    totalCount: totalItemsCount,
     currentPage: page,
     perPage: limit
   })
