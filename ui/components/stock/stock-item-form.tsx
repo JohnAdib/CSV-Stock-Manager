@@ -8,12 +8,23 @@ import { Input } from '@components/atoms/input'
 import { Text } from '@components/atoms/text'
 import { Textarea } from '@components/atoms/textarea'
 import clsx from 'clsx'
+import { useEffect, useState } from 'react'
 
-interface IAddStockItem {
+interface IStockItemForm {
+  validationErrors?: Record<string, string>
   onSubmit: (data: IStockAdd) => void
 }
 
-export function AddStockItem({ onSubmit }: IAddStockItem) {
+export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
+  const [formErrors, setFormErrors] = useState<
+    Record<string, string> | undefined
+  >(undefined)
+
+  // on change validation Error, update the formErrors state, with useEffect
+  useEffect(() => {
+    setFormErrors(validationErrors)
+  }, [validationErrors])
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -33,18 +44,23 @@ export function AddStockItem({ onSubmit }: IAddStockItem) {
   }
 
   return (
-    <form method="post" className="mx-auto max-w-4xl" onSubmit={handleSubmit}>
+    <form
+      method="post"
+      className="mx-auto max-w-4xl"
+      onSubmit={handleSubmit}
+      onReset={() => setFormErrors(undefined)}
+    >
       <Heading>Add New Stock Item</Heading>
       <Divider className="my-2 md:my-4 lg:my-10 lg:mt-6" />
 
       <section className="grid gap-x-8 gap-y-2 md:gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
-          <Subheading>Quantity</Subheading>
+          <Subheading>Quantity *</Subheading>
           <Text className="text-sm sm:text-base">
             Number of items in stock. This will be used to track the stock.
           </Text>
         </div>
-        <div>
+        <div className="space-y-2">
           <Input
             aria-label="quantity"
             name="quantity"
@@ -53,20 +69,24 @@ export function AddStockItem({ onSubmit }: IAddStockItem) {
             type="number"
             min={0}
             max={1000000000000}
+            invalid={!!formErrors?.quantity}
           />
+          <div className="text-sm text-red-800 dark:text-red-200">
+            {formErrors?.quantity}
+          </div>
         </div>
       </section>
 
       <Divider className="my-2 md:my-4 lg:my-10" soft />
 
-      <section className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+      <section className="grid gap-x-8 gap-y-2 md:gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
-          <Subheading>SKU</Subheading>
+          <Subheading>SKU *</Subheading>
           <Text className="text-sm sm:text-base">
             The Stock Keeping Unit (SKU) is a unique identifier for each item.
           </Text>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-2">
           <Input
             aria-label="sku"
             name="sku"
@@ -74,12 +94,16 @@ export function AddStockItem({ onSubmit }: IAddStockItem) {
             placeholder="UK-xxxx"
             minLength={0}
             maxLength={20}
+            invalid={!!formErrors?.sku}
           />
+          <div className="text-sm text-red-800 dark:text-red-200">
+            {formErrors?.sku}
+          </div>
         </div>
       </section>
 
       <Divider className="my-2 md:my-4 lg:my-10" soft />
-      <section className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+      <section className="grid gap-x-8 gap-y-2 md:gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
           <Subheading>Description</Subheading>
           <Text className="text-sm sm:text-base">
@@ -95,27 +119,35 @@ export function AddStockItem({ onSubmit }: IAddStockItem) {
             rows={3}
             maxLength={1000}
             className={clsx('resize-none')}
+            invalid={!!formErrors?.description}
           />
+          <div className="text-sm mt-1 text-red-800 dark:text-red-200">
+            {formErrors?.description}
+          </div>
         </div>
       </section>
 
       <Divider className="my-2 md:my-4 lg:my-10" soft />
 
-      <section className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+      <section className="grid gap-x-8 gap-y-2 md:gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
-          <Subheading>Store</Subheading>
+          <Subheading>Store *</Subheading>
           <Text className="text-sm sm:text-base">
             The store where the item is located. 3 characters long.
           </Text>
         </div>
-        <div className="space-y-4">
+        <div className="space-y-2">
           <Input
             aria-label="store"
             name="store"
             autoComplete="off"
             minLength={0}
             maxLength={20}
+            invalid={!!formErrors?.store}
           />
+          <div className="text-sm mt-1 text-red-800 dark:text-red-200">
+            {formErrors?.store}
+          </div>
         </div>
       </section>
 
