@@ -1,8 +1,6 @@
 'use client'
 
-import { apiFetch } from '@/app/_helper/fetch/api-fetch'
-import { apiMessagesAlert } from '@/app/_helper/fetch/api-messages-alert'
-import { convertErrorsToObject } from '@/app/_helper/fetch/convert-error-to-object'
+import { apiFetch, apiNotification } from '@/app/_helper/fetch'
 import { AddStockItem } from '@/components/stock/add-stock-item'
 import { IStockAdd } from '@/interfaces'
 import { useRouter } from 'next/navigation'
@@ -17,9 +15,9 @@ export default function Page() {
       body: formData
     })
 
-    apiMessagesAlert({ apiRes })
-    const errorObj = convertErrorsToObject({ messages: apiRes.messages })
-    console.log('errorObj', errorObj)
+    apiNotification({ apiRes })
+
+    console.log('errorObj', apiRes.validation)
 
     if (apiRes.okay) {
       router.push('/stock')

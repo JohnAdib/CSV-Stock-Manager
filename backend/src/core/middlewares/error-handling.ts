@@ -25,29 +25,22 @@ export const errorHandling = (
   const errResult = err?.result || null
   const errMeta = err?.meta || undefined
 
+  const isError = errStatusCode >= 500
+  const errType = isError ? 'error' : undefined
+
   const apiResponse: IResponseJson = {
     okay: false,
     statusCode: errStatusCode,
     result: errResult,
     meta: errMeta,
-    messages: err.messages
+    notification: {
+      type: errType,
+      title: errTitle,
+      text: errMessage
+    }
   }
 
-  // if there are no messages, set one message with the error title and message
-  if (!err?.messages) {
-    const isError = errStatusCode >= 500
-    const errType = isError ? 'error' : undefined
-
-    apiResponse.messages = [
-      {
-        type: errType,
-        title: errTitle,
-        msg: errMessage
-      }
-    ]
-  }
-
-  const logLevel = errStatusCode >= 500 ? 'error' : 'verbose'
+  const logLevel = errType ?? 'verbose'
   logger.log(logLevel, errTitle, apiResponse)
 
   if (!err?.statusCode) {

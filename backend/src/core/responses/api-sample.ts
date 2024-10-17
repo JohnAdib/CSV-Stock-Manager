@@ -3,10 +3,8 @@ import { type IResponseJson } from '../interfaces/index.js'
 export const responseApiSample: IResponseJson = {
   okay: true,
   result: null,
-  messages: [
-    {
-      title: 'Sample API Response!',
-      msg: 'Just to show you how an API response looks like!'
-    }
-  ]
+  notification: {
+    text: 'Just to show you how an API response looks like!',
+    title: 'Sample API Response!'
+  }
 }

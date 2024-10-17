@@ -19,12 +19,10 @@ export async function getAllController(
   }
 
   if (serviceResult.data === null) {
-    apiResponse.messages = [
-      {
-        type: 'info',
-        msg: 'No Items Found!'
-      }
-    ]
+    apiResponse.notification = {
+      type: 'info',
+      text: 'No Items Found!'
+    }
   }
 
   res.status(200).json(apiResponse)

@@ -1,11 +1,12 @@
-import type { IResponseJsonMessage } from './i-response-json-message.js'
 import type { IResponseJsonMeta } from './i-response-json-meta.js'
+import type { IResponseJsonNotification } from './i-response-json-notification.js'
 
 export interface IResponseJson {
   okay: boolean
-  messages?: Array<IResponseJsonMessage>
+  statusCode?: number
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   result: any
   meta?: IResponseJsonMeta
-  statusCode?: number
+  notification?: IResponseJsonNotification
+  validation?: Record<string, string>
 }

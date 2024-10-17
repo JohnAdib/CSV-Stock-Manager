@@ -34,9 +34,7 @@ import { type IResponseJson } from '../interfaces/index.js'
 export const responseApiV1: IResponseJson = {
   okay: true,
   result: null,
-  messages: [
-    {
-      msg: 'Wow! You found the API v1! Am I working? 🤔'
-    }
-  ]
+  notification: {
+    text: 'Wow! You found the API v1! Am I working? 🤔'
+  }
 }
