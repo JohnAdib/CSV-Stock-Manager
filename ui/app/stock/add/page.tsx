@@ -9,7 +9,7 @@ import { useState } from 'react'
 
 export default function Page() {
   const router = useRouter()
-  const [apiRes, setApiRes] = useState<IResponseJson | null>(null)
+  const [apiResAdd, setApiResAdd] = useState<IResponseJson | null>(null)
 
   const addHandler = async (formData: IStockAdd): Promise<void> => {
     const apiResponse = await apiFetch({
@@ -18,7 +18,7 @@ export default function Page() {
       body: formData
     })
 
-    setApiRes(apiResponse)
+    setApiResAdd(apiResponse)
     apiNotification({ apiResponse })
 
     if (apiResponse?.okay) {
@@ -36,7 +36,7 @@ export default function Page() {
         btnColor="dark/zinc"
       />
       <StockItemForm
-        validationErrors={apiRes?.validation}
+        validationErrors={apiResAdd?.validation}
         onSubmit={addHandler}
       />
     </>
