@@ -48,10 +48,8 @@ export const responseApiHello: IResponseJson = {
     datetime: new Date().toISOString(),
     documentation: '/docs'
   },
-  messages: [
-    {
-      title: 'Hello!',
-      msg: 'Welcome to our API. Hope you have a great time here. 🎉'
-    }
-  ]
+  notification: {
+    text: 'Welcome to our API. Hope you have a great time here. 🎉',
+    title: 'Hello!'
+  }
 }
