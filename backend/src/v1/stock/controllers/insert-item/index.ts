@@ -14,9 +14,13 @@ export async function insertItemController(
   const statusCode = 201
   const apiResponse: IResponseJson = {
     okay: true,
+    statusCode,
     result: serviceResult.data,
     meta: serviceResult.meta,
-    statusCode
+    notification: {
+      text: 'Item successfully added!',
+      type: 'success'
+    }
   }
 
   res.status(statusCode).json(apiResponse)

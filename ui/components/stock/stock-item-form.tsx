@@ -1,6 +1,6 @@
 'use client'
 
-import { IStockAdd } from '@/interfaces'
+import { IStock, IStockAdd } from '@/interfaces'
 import { Button } from '@components/atoms/button'
 import { Divider } from '@components/atoms/divider'
 import { Heading, Subheading } from '@components/atoms/heading'
@@ -12,10 +12,15 @@ import { useEffect, useState } from 'react'
 
 interface IStockItemForm {
   validationErrors?: Record<string, string>
-  onSubmit: (data: IStockAdd) => void
+  defaultValues?: IStock
+  onSubmit?: (data: IStockAdd) => void
 }
 
-export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
+export function StockItemForm({
+  validationErrors,
+  defaultValues,
+  onSubmit
+}: IStockItemForm) {
   const [formErrors, setFormErrors] = useState<
     Record<string, string> | undefined
   >(undefined)
@@ -40,7 +45,9 @@ export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
     }
 
     // Pass the collected data to the onSubmit handler
-    onSubmit(data)
+    if (onSubmit) {
+      onSubmit(data)
+    }
   }
 
   return (
@@ -50,8 +57,8 @@ export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
       onSubmit={handleSubmit}
       onReset={() => setFormErrors(undefined)}
     >
-      <Heading>Add New Stock Item</Heading>
-      <Divider className="my-2 md:my-4 lg:my-10 lg:mt-6" />
+      <Heading>Stock Item {defaultValues?.id}</Heading>
+      <Divider className="my-2 md:my-4 lg:my-6 lg:mt-6" />
 
       <section className="grid gap-x-8 gap-y-2 md:gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
@@ -64,7 +71,7 @@ export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
           <Input
             aria-label="quantity"
             name="quantity"
-            defaultValue=""
+            defaultValue={defaultValues?.quantity}
             autoComplete="off"
             type="number"
             min={0}
@@ -77,7 +84,7 @@ export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
         </div>
       </section>
 
-      <Divider className="my-2 md:my-4 lg:my-10" soft />
+      <Divider className="my-2 md:my-4 lg:my-6" soft />
 
       <section className="grid gap-x-8 gap-y-2 md:gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
@@ -90,6 +97,7 @@ export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
           <Input
             aria-label="sku"
             name="sku"
+            defaultValue={defaultValues?.sku}
             autoComplete="off"
             placeholder="UK-xxxx"
             minLength={0}
@@ -102,7 +110,7 @@ export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
         </div>
       </section>
 
-      <Divider className="my-2 md:my-4 lg:my-10" soft />
+      <Divider className="my-2 md:my-4 lg:my-6" soft />
       <section className="grid gap-x-8 gap-y-2 md:gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
           <Subheading>Description</Subheading>
@@ -115,6 +123,7 @@ export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
           <Textarea
             aria-label="description"
             name="description"
+            defaultValue={defaultValues?.description}
             resizable={false}
             rows={3}
             maxLength={1000}
@@ -127,7 +136,7 @@ export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
         </div>
       </section>
 
-      <Divider className="my-2 md:my-4 lg:my-10" soft />
+      <Divider className="my-2 md:my-4 lg:my-6" soft />
 
       <section className="grid gap-x-8 gap-y-2 md:gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
@@ -140,6 +149,7 @@ export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
           <Input
             aria-label="store"
             name="store"
+            defaultValue={defaultValues?.store}
             autoComplete="off"
             minLength={0}
             maxLength={20}
@@ -151,12 +161,15 @@ export function StockItemForm({ validationErrors, onSubmit }: IStockItemForm) {
         </div>
       </section>
 
-      <Divider className="my-2 md:my-4 lg:my-10" soft />
+      <Divider className="my-2 md:my-4 lg:my-6" soft />
 
       <div className="flex justify-end gap-4">
-        <Button type="reset" plain>
-          Reset
-        </Button>
+        {/* { show reset if sku is not exist} */}
+        {!defaultValues?.sku && (
+          <Button type="reset" plain>
+            Reset
+          </Button>
+        )}
         <Button type="submit" color="sky">
           Save changes
         </Button>

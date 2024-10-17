@@ -4,24 +4,24 @@ import { v1StockRepository } from '../repositories/index.js'
 
 interface IServiceGetAll {
   page: number
-  perPage: number
+  limit: number
 }
 
 export async function getAll({
   page,
-  perPage
+  limit
 }: IServiceGetAll): Promise<IServiceResult<IStockItemDb>> {
   const dbData: IStockItemDb[] =
     await v1StockRepository.stock.read.getStockItems({
       page,
-      perPage
+      limit
     })
 
   const apiResponse: IServiceResult<IStockItemDb> = core.helpers.paginate({
     data: dbData,
     totalCount: dbData.length,
     currentPage: page,
-    perPage
+    perPage: limit
   })
 
   return apiResponse

@@ -14,9 +14,13 @@ export async function updateItemController(
   const statusCode = 200
   const apiResponse: IResponseJson = {
     okay: true,
+    statusCode: statusCode,
     result: serviceResult.data,
     meta: serviceResult.meta,
-    statusCode: statusCode
+    notification: {
+      text: 'Item successfully updated!',
+      type: 'success'
+    }
   }
 
   res.status(statusCode).json(apiResponse)

@@ -1,34 +1,52 @@
 'use client'
 
+import { IResponseJson } from '@/interfaces'
 import { EmptyState } from '@components/layout/empty-state'
 import { Loading } from '@components/layout/loading'
 import { PageHeader } from '@components/layout/page-header'
 import { Pagination } from '@components/layout/pagination'
 import { StockTable } from '@components/stock/stock-table'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { apiFetch } from '../_helper/fetch'
 // import { useSearchParams } from 'next/navigation'
 
 export default function Page() {
-  // const searchParams = useSearchParams()
+  const [apiRes, setApiRes] = useState<IResponseJson | undefined>(undefined)
+  const searchParams = useSearchParams()
 
-  // const searchParamPage = searchParams.get('page')
-  //   ? parseInt(searchParams.get('page') as string, 10)
-  //   : 1
+  const searchParamPage = searchParams.get('page')
+    ? parseInt(searchParams.get('page') as string, 10)
+    : 1
 
-  // // TODO: Make this configurable and move it to ENV
-  // // For now, we will hardcode it to 2 to keep it simple and test the pagination
-  // const defaultPerPage = 2
-  // const searchParamLimit = searchParams.get('limit')
-  //   ? parseInt(searchParams.get('limit') as string, 10)
-  //   : defaultPerPage
+  // TODO: Make this configurable and move it to ENV
+  // For now, we will hardcode it to 2 to keep it simple and test the pagination
+  const defaultPerPage = 2
+  const searchParamLimit = searchParams.get('limit')
+    ? parseInt(searchParams.get('limit') as string, 10)
+    : defaultPerPage
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const data: any = null
+  useEffect(() => {
+    console.log('fetching item data for list')
+    apiFetch({
+      method: 'GET',
+      url: 'http://localhost:7011/v1/stock',
+      query: {
+        page: searchParamPage,
+        limit: searchParamLimit
+      }
+    }).then((res) => {
+      setApiRes(res)
+    })
+  }, [])
 
-  if (data === undefined) {
+  if (apiRes === undefined) {
     return <Loading />
   }
 
-  if (data === null || data?.result?.length === 0) {
+  console.log('apiRes?.result', apiRes?.result)
+  console.log('apiRes?.result?.length', apiRes?.result?.length)
+  if (apiRes === null || !apiRes?.result?.length) {
     return (
       <EmptyState
         title="Stock is empty"
@@ -48,11 +66,11 @@ export default function Page() {
         btnColor="sky"
         btnHref="/stock/add"
       />
-      <StockTable stockItems={data.result} />
+      <StockTable stockItems={apiRes?.result} />
       <Pagination
-        currentPage={data?.meta?.currentPage}
-        totalResults={data?.meta?.totalItems}
-        resultsPerPage={data?.meta?.perPage}
+        currentPage={apiRes?.meta?.page}
+        totalResults={apiRes?.meta?.totalCount}
+        resultsPerPage={apiRes?.meta?.perPage}
         baseUrl="/stock"
       />
     </>

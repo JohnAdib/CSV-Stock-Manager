@@ -3,10 +3,10 @@ import clsx from 'clsx'
 import Link from 'next/link'
 
 interface PaginationProps {
-  currentPage: number
-  totalResults: number
-  resultsPerPage: number
-  baseUrl: string
+  currentPage?: number
+  totalResults?: number
+  resultsPerPage?: number
+  baseUrl?: string
 }
 
 function getTargetPageLink(baseUrl: string, page: number) {
@@ -27,7 +27,10 @@ export function Pagination({
   if (!baseUrl) {
     return null
   }
-  if (totalResults <= 1) {
+  if (!totalResults || totalResults <= 1) {
+    return null
+  }
+  if (!resultsPerPage || !currentPage) {
     return null
   }
 
