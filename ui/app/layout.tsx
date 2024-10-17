@@ -41,7 +41,7 @@ export default function RootLayout({
         )}
       >
         <Header />
-        <Container className={clsx('grow', 'py-6 md:py-12')}>
+        <Container className={clsx('grow', 'py-4 sm:py-6 md:py-12')}>
           {children}
         </Container>
         <Footer />

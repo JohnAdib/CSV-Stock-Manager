@@ -35,12 +35,12 @@ export function AddStockItem({ onSubmit }: IAddStockItem) {
   return (
     <form method="post" className="mx-auto max-w-4xl" onSubmit={handleSubmit}>
       <Heading>Add New Stock Item</Heading>
-      <Divider className="my-10 mt-6" />
+      <Divider className="my-2 md:my-4 lg:my-10 lg:mt-6" />
 
-      <section className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
+      <section className="grid gap-x-8 gap-y-2 md:gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
           <Subheading>Quantity</Subheading>
-          <Text>
+          <Text className="text-sm sm:text-base">
             Number of items in stock. This will be used to track the stock.
           </Text>
         </div>
@@ -57,12 +57,12 @@ export function AddStockItem({ onSubmit }: IAddStockItem) {
         </div>
       </section>
 
-      <Divider className="my-10" soft />
+      <Divider className="my-2 md:my-4 lg:my-10" soft />
 
       <section className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
           <Subheading>SKU</Subheading>
-          <Text>
+          <Text className="text-sm sm:text-base">
             The Stock Keeping Unit (SKU) is a unique identifier for each item.
           </Text>
         </div>
@@ -78,11 +78,11 @@ export function AddStockItem({ onSubmit }: IAddStockItem) {
         </div>
       </section>
 
-      <Divider className="my-10" soft />
+      <Divider className="my-2 md:my-4 lg:my-10" soft />
       <section className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
           <Subheading>Description</Subheading>
-          <Text>
+          <Text className="text-sm sm:text-base">
             A brief description of the item. This will help you identify the
             item.
           </Text>
@@ -99,12 +99,14 @@ export function AddStockItem({ onSubmit }: IAddStockItem) {
         </div>
       </section>
 
-      <Divider className="my-10" soft />
+      <Divider className="my-2 md:my-4 lg:my-10" soft />
 
       <section className="grid gap-x-8 gap-y-6 sm:grid-cols-2">
         <div className="space-y-1">
           <Subheading>Store</Subheading>
-          <Text>The store where the item is located. 3 characters long.</Text>
+          <Text className="text-sm sm:text-base">
+            The store where the item is located. 3 characters long.
+          </Text>
         </div>
         <div className="space-y-4">
           <Input
@@ -117,7 +119,7 @@ export function AddStockItem({ onSubmit }: IAddStockItem) {
         </div>
       </section>
 
-      <Divider className="my-10" soft />
+      <Divider className="my-2 md:my-4 lg:my-10" soft />
 
       <div className="flex justify-end gap-4">
         <Button type="reset" plain>
