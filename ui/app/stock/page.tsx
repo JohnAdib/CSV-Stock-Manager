@@ -27,7 +27,6 @@ export default function Page() {
     : defaultPerPage
 
   useEffect(() => {
-    console.log('fetching item data for list')
     apiFetch({
       method: 'GET',
       url: 'http://localhost:7011/v1/stock',
@@ -38,14 +37,12 @@ export default function Page() {
     }).then((res) => {
       setApiRes(res)
     })
-  }, [])
+  }, [searchParamLimit, searchParamPage])
 
   if (apiRes === undefined) {
     return <Loading />
   }
 
-  console.log('apiRes?.result', apiRes?.result)
-  console.log('apiRes?.result?.length', apiRes?.result?.length)
   if (apiRes === null || !apiRes?.result?.length) {
     return (
       <EmptyState

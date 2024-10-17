@@ -9,6 +9,10 @@ interface IServiceDeleteStockItemById {
 export async function deleteStockItemById({
   id
 }: IServiceDeleteStockItemById): Promise<IServiceResult<IStockItemDb>> {
+  await v1StockRepository.stock.read.getStockItemById({
+    id
+  })
+
   await v1StockRepository.stock.delete.deleteStockItemById({
     id
   })

@@ -3,7 +3,7 @@
 import { IStock, IStockAdd } from '@/interfaces'
 import { Button } from '@components/atoms/button'
 import { Divider } from '@components/atoms/divider'
-import { Heading, Subheading } from '@components/atoms/heading'
+import { Subheading } from '@components/atoms/heading'
 import { Input } from '@components/atoms/input'
 import { Text } from '@components/atoms/text'
 import { Textarea } from '@components/atoms/textarea'
@@ -57,7 +57,6 @@ export function StockItemForm({
       onSubmit={handleSubmit}
       onReset={() => setFormErrors(undefined)}
     >
-      <Heading>Stock Item {defaultValues?.id}</Heading>
       <Divider className="my-2 md:my-4 lg:my-6 lg:mt-6" />
 
       <section className="grid gap-x-8 gap-y-2 md:gap-y-6 sm:grid-cols-2">

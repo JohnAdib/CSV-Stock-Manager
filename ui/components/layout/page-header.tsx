@@ -9,7 +9,7 @@ interface IPageHeader {
   btnText: string
   btnHref: string
   btnAction?: () => void
-  btnColor?: 'sky' | 'red'
+  btnColor?: 'sky' | 'red' | 'dark/zinc'
 }
 
 export function PageHeader({

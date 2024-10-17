@@ -3,15 +3,12 @@ import { ZodError } from 'zod'
 import type { IResponseJson } from '../interfaces/index.js'
 
 export const handleZodError = (err: ZodError, res: Response): void => {
-  // const validationErrors = err.errors.map((error) => ({
-  //   title: 'Validation Error',
-  //   text: error.message,
-  //   path: error.path.join('.')
-  // }))
-
   const validationErrors = err.errors.reduce(
     (acc: Record<string, string>, error) => {
-      const path = error.path.join('.')
+      const path = error.path?.join('.')
+      if (!path) {
+        return acc
+      }
       acc[path] = error.message
       return acc
     },
