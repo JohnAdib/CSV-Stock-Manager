@@ -9,7 +9,6 @@ import { StockTable } from '@components/stock/stock-table'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../_helper/fetch'
-// import { useSearchParams } from 'next/navigation'
 
 export default function Page() {
   const [apiRes, setApiRes] = useState<IResponseJson | undefined>(undefined)

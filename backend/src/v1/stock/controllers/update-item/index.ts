@@ -7,8 +7,11 @@ export async function updateItemController(
   req: Request,
   res: Response
 ): Promise<void> {
-  const { id } = validation.parse(req.params)
+  const { id, sku, quantity, store, description } = validation.parse(req.body)
 
+  console.log('data', sku, quantity, store, description)
+
+  // TOOD: Update the item in the database
   const serviceResult = await v1StockServices.getStockItemById({ id })
 
   const statusCode = 200
