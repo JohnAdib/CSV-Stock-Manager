@@ -20,15 +20,18 @@ export default function Page() {
     setApiRes(apiResponse)
     apiNotification({ apiResponse })
 
+    console.log('add api response', apiResponse)
+
     if (apiRes?.okay) {
+      console.log('add api response okay, redirecting')
       router.push('/stock')
     }
   }
 
   return (
     <StockItemForm
-      onSubmit={addHandler}
       validationErrors={apiRes?.validation}
+      onSubmit={addHandler}
     />
   )
 }

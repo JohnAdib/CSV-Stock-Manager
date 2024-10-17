@@ -7,9 +7,9 @@ export async function getAllController(
   req: Request,
   res: Response
 ): Promise<void> {
-  const { page, perPage } = validation.parse(req.query)
+  const { page, limit } = validation.parse(req.query)
 
-  const serviceResult = await v1StockServices.getAll({ page, perPage })
+  const serviceResult = await v1StockServices.getAll({ page, limit })
 
   const apiResponse: IResponseJson = {
     okay: true,
