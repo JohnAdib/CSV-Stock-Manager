@@ -26,17 +26,20 @@ function StockPage() {
     ? parseInt(searchParams.get('limit') as string, 10)
     : defaultPerPage
 
-  useEffect(() => {
-    apiFetch({
+  const fetchStockData = async () => {
+    const res = await apiFetch({
       method: 'GET',
       url: apiUrlStockV1,
       query: {
         page: searchParamPage,
         limit: searchParamLimit
       }
-    }).then((res) => {
-      setApiRes(res)
     })
+    setApiRes(res)
+  }
+
+  useEffect(() => {
+    fetchStockData()
   }, [searchParamLimit, searchParamPage])
 
   const handleFileUpload = async (file: File) => {
@@ -52,8 +55,7 @@ function StockPage() {
     apiNotification({ apiResponse })
 
     if (apiResponse?.okay) {
-      // refresh the page to show the table
-      router.refresh()
+      fetchStockData()
     }
   }
 
