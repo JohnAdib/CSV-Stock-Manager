@@ -1,11 +1,12 @@
 import { apiFetch, apiNotification } from '@/app/_helper/fetch'
+import { apiUrlStockV1 } from '@/app/_helper/url/stock'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 import Swal from 'sweetalert2'
 
 const deleteHandler = async ({ id }: { id: number }): Promise<boolean> => {
   try {
     const apiResponse = await apiFetch({
-      url: 'http://localhost:7011/v1/stock/' + id,
+      url: apiUrlStockV1 + id,
       method: 'DELETE'
     })
     apiNotification({ apiResponse })

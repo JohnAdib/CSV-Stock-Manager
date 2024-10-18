@@ -1,6 +1,7 @@
 'use client'
 
 import { apiFetch, apiNotification } from '@/app/_helper/fetch'
+import { apiUrlStockV1 } from '@/app/_helper/url/stock'
 import { EmptyState } from '@/components/layout/empty-state'
 import { Loading } from '@/components/layout/loading'
 import { PageHeader } from '@/components/layout/page-header'
@@ -17,9 +18,8 @@ export default function Page({ params }: { params: { id: string } }) {
   const itemId = parseInt(params.id, 10)
 
   useEffect(() => {
-    console.log('fetching item data for id', itemId)
     apiFetch({
-      url: 'http://localhost:7011/v1/stock/' + itemId,
+      url: apiUrlStockV1 + itemId,
       method: 'GET'
     }).then((res) => {
       setItemData(res.result)
@@ -33,11 +33,12 @@ export default function Page({ params }: { params: { id: string } }) {
     }
 
     const apiResponse = await apiFetch({
-      url: 'http://localhost:7011/v1/stock/' + itemId,
+      url: apiUrlStockV1 + itemId,
       method: 'PUT',
       body: formEditData
     })
 
+    console.log('edit response', apiResponse)
     setApiResEdit(apiResponse)
     apiNotification({ apiResponse })
 

@@ -27,6 +27,7 @@ export function StockItemForm({
 
   // on change validation Error, update the formErrors state, with useEffect
   useEffect(() => {
+    console.log('validationErrors', validationErrors)
     setFormErrors(validationErrors)
   }, [validationErrors])
 
