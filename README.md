@@ -79,11 +79,11 @@ To deploy the app to a cloud, we need to add a Dockerfile for the backend and fr
 
 ## Screenshot
 
-![3d-print-manager](doc/ui-homepage.png)
-![3d-print-manager](doc/ui-about.png)
-![3d-print-manager](doc/ui-list-empty.png)
-![3d-print-manager](doc/ui-add.png)
-![3d-print-manager](doc/ui-list.png)
-![3d-print-manager](doc/ui-upload.png)
-![3d-print-manager](doc/ui-delete.png)
-![3d-print-manager](doc/ui-list-dark.png)
+![3d-print-manager](docs/ui-homepage.png)
+![3d-print-manager](docs/ui-about.png)
+![3d-print-manager](docs/ui-list-empty.png)
+![3d-print-manager](docs/ui-add.png)
+![3d-print-manager](docs/ui-list.png)
+![3d-print-manager](docs/ui-upload.png)
+![3d-print-manager](docs/ui-delete.png)
+![3d-print-manager](docs/ui-list-dark.png)
