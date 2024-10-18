@@ -18,7 +18,11 @@ export async function uploadCsvController(
   const apiResponse: IResponseJson = {
     okay: true,
     result: serviceResult.data,
-    statusCode
+    statusCode,
+    notification: {
+      text: 'CSV file uploaded successfully!',
+      type: 'success'
+    }
   }
 
   res.status(statusCode).json(apiResponse)
