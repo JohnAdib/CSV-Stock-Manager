@@ -41,11 +41,41 @@ This project leverages a modern tech stack for both the frontend and backend, en
 
 ## Installation
 
-_(Placeholder for Docker)_
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/JohnAdib/CSV-Stock-Manager.git
+   ```
+
+2. **Copy the necessary environment files:**
+
+   - Make sure to copy the `.env.example` file in the `backend` directory and rename it to `.env`. Update the environment variables as needed.
+
+   ```bash
+   cp backend/.env.example backedn/.env
+   ```
+
+3. Install the dependencies for both the backend and frontend:
+
+   ```bash
+   cd backend
+   npm install
+
+   cd ../frontend
+   npm install
+   ```
+
+4. Start the backend and frontend servers with turborepo:
+
+   ```bash
+    npm run dev
+   ```
+
+5. Access the app at `http://localhost:3000`.
 
 ## Deploy in Cloud
 
-_(Placeholder for cloud deployment instructions)_
+To deploy the app to a cloud, we need to add a Dockerfile for the backend and frontend, and a docker-compose file to run both services together. We can then build the Docker image and push it to a container registry like Docker Hub. Finally, we can deploy the image to a cloud platform.
 
 ## Screenshot
 
