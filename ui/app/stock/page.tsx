@@ -9,6 +9,7 @@ import { StockTable } from '@components/stock/stock-table'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../_helper/fetch'
+import { apiUrlStockV1 } from '../_helper/url/stock'
 
 export default function Page() {
   const [apiRes, setApiRes] = useState<IResponseJson | undefined>(undefined)
@@ -28,7 +29,7 @@ export default function Page() {
   useEffect(() => {
     apiFetch({
       method: 'GET',
-      url: 'http://localhost:7011/v1/stock',
+      url: apiUrlStockV1,
       query: {
         page: searchParamPage,
         limit: searchParamLimit

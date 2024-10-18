@@ -1,6 +1,7 @@
 'use client'
 
 import { apiFetch, apiNotification } from '@/app/_helper/fetch'
+import { apiUrlStockV1 } from '@/app/_helper/url/stock'
 import { PageHeader } from '@/components/layout/page-header'
 import { StockItemForm } from '@/components/stock/stock-item-form'
 import { IResponseJson, IStockAdd } from '@/interfaces'
@@ -13,7 +14,7 @@ export default function Page() {
 
   const addHandler = async (formData: IStockAdd): Promise<void> => {
     const apiResponse = await apiFetch({
-      url: 'http://localhost:7011/v1/stock',
+      url: apiUrlStockV1,
       method: 'POST',
       body: formData
     })

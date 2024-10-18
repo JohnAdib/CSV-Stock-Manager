@@ -7,7 +7,7 @@ interface IGetStockItemBySkyParams {
 
 export const getStockItemBySku = async ({
   sku
-}: IGetStockItemBySkyParams): Promise<IStockItemDb> => {
+}: IGetStockItemBySkyParams): Promise<IStockItemDb | null> => {
   const prisma = core.database.prisma.getPrismaInstance()
   let stockItem: IStockItemDb | null = null
 
@@ -17,10 +17,6 @@ export const getStockItemBySku = async ({
     })
   } catch (error: unknown) {
     throw new core.error.client.Database(error)
-  }
-
-  if (!stockItem) {
-    throw new core.error.client.NotFound(`Stock item with sku ${sku} not found`)
   }
 
   return stockItem
