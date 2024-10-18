@@ -1,5 +1,6 @@
 'use client'
 
+import { FileUploaderInput } from '@/components/layout/file-uploader-input'
 import { IResponseJson } from '@/interfaces'
 import { EmptyState } from '@components/layout/empty-state'
 import { Loading } from '@components/layout/loading'
@@ -43,12 +44,15 @@ function StockPage() {
 
   if (apiRes === null || !apiRes?.result?.length) {
     return (
-      <EmptyState
-        title="Stock is empty"
-        description="Get started by adding a new item."
-        btnHref="/stock/add"
-        btnText="Add Item to Stock"
-      />
+      <>
+        <FileUploaderInput />
+        <EmptyState
+          title="Stock is empty"
+          description="Get started by adding a new item."
+          btnHref="/stock/add"
+          btnText="Add Item to Stock"
+        />
+      </>
     )
   }
 
@@ -61,6 +65,7 @@ function StockPage() {
         btnColor="sky"
         btnHref="/stock/add"
       />
+      <FileUploaderInput />
       <StockTable stockItems={apiRes?.result} />
       <Pagination
         currentPage={apiRes?.meta?.page}
