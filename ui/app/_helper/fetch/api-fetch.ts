@@ -20,11 +20,15 @@ export async function apiFetch({
 }: IApiFetch): Promise<IResponseJson> {
   const reqBody: string = stringify ? JSON.stringify(body) : (body as string)
 
+  const fetchOptionsHeaders: HeadersInit = {}
+
+  if (stringify) {
+    fetchOptionsHeaders['Content-Type'] = 'application/json'
+  }
+
   const fetchOptions: RequestInit = {
     method: method,
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: fetchOptionsHeaders,
     body: reqBody
   }
 
