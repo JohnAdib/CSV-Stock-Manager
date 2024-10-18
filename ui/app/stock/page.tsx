@@ -7,11 +7,11 @@ import { PageHeader } from '@components/layout/page-header'
 import { Pagination } from '@components/layout/pagination'
 import { StockTable } from '@components/stock/stock-table'
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { apiFetch } from '../_helper/fetch'
 import { apiUrlStockV1 } from '../_helper/url/stock'
 
-export default function Page() {
+function StockPage() {
   const [apiRes, setApiRes] = useState<IResponseJson | undefined>(undefined)
   const searchParams = useSearchParams()
 
@@ -19,8 +19,6 @@ export default function Page() {
     ? parseInt(searchParams.get('page') as string, 10)
     : 1
 
-  // TODO: Make this configurable and move it to ENV
-  // For now, we will hardcode it to 2 to keep it simple and test the pagination
   const defaultPerPage = 2
   const searchParamLimit = searchParams.get('limit')
     ? parseInt(searchParams.get('limit') as string, 10)
@@ -71,5 +69,14 @@ export default function Page() {
         baseUrl="/stock"
       />
     </>
+  )
+}
+
+// Wrap the component with Suspense
+export default function Page() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <StockPage />
+    </Suspense>
   )
 }
