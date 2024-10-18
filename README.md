@@ -2,6 +2,8 @@
 
 A full-stack inventory management app built with Node.js, Prisma, and Next.js for handling inventory data from CSV files. The app allows you to upload, validate, and manage stock data with ease, providing a responsive user interface and flexible cloud deployment options.
 
+https://www.loom.com/share/b3f35b435d6349b4adf7e59edfa23d29
+
 ## Features
 
 - Upload CSV files to import inventory data (SKU, quantity, store, description).

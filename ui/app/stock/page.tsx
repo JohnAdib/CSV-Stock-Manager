@@ -7,13 +7,12 @@ import { Loading } from '@components/layout/loading'
 import { PageHeader } from '@components/layout/page-header'
 import { Pagination } from '@components/layout/pagination'
 import { StockTable } from '@components/stock/stock-table'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useState } from 'react'
 import { apiFetch, apiNotification } from '../_helper/fetch'
 import { apiUrlStockV1 } from '../_helper/url/stock'
 
 function StockPage() {
-  const router = useRouter()
   const [apiRes, setApiRes] = useState<IResponseJson | undefined>(undefined)
   const searchParams = useSearchParams()
 
