@@ -7,12 +7,13 @@ import { Loading } from '@components/layout/loading'
 import { PageHeader } from '@components/layout/page-header'
 import { Pagination } from '@components/layout/pagination'
 import { StockTable } from '@components/stock/stock-table'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useState } from 'react'
-import { apiFetch } from '../_helper/fetch'
+import { apiFetch, apiNotification } from '../_helper/fetch'
 import { apiUrlStockV1 } from '../_helper/url/stock'
 
 function StockPage() {
+  const router = useRouter()
   const [apiRes, setApiRes] = useState<IResponseJson | undefined>(undefined)
   const searchParams = useSearchParams()
 
@@ -38,6 +39,24 @@ function StockPage() {
     })
   }, [searchParamLimit, searchParamPage])
 
+  const handleFileUpload = async (file: File) => {
+    const formData = new FormData()
+    formData.append('csv', file)
+
+    const apiResponse = await apiFetch({
+      method: 'POST',
+      url: apiUrlStockV1 + '/upload',
+      body: formData,
+      stringify: false
+    })
+    apiNotification({ apiResponse })
+
+    if (apiResponse?.okay) {
+      // refresh the page to show the table
+      router.refresh()
+    }
+  }
+
   if (apiRes === undefined) {
     return <Loading />
   }
@@ -45,7 +64,7 @@ function StockPage() {
   if (apiRes === null || !apiRes?.result?.length) {
     return (
       <>
-        <FileUploaderInput />
+        <FileUploaderInput onFileSelect={handleFileUpload} />
         <EmptyState
           title="Stock is empty"
           description="Get started by adding a new item."
@@ -65,7 +84,7 @@ function StockPage() {
         btnColor="sky"
         btnHref="/stock/add"
       />
-      <FileUploaderInput />
+      <FileUploaderInput onFileSelect={handleFileUpload} />
       <StockTable stockItems={apiRes?.result} />
       <Pagination
         currentPage={apiRes?.meta?.page}
