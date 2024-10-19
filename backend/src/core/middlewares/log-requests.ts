@@ -16,7 +16,7 @@ export const logRequests = (
         method: req.method,
         url: req.originalUrl,
         startTime
-      })
+      }).log()
 
       logger.info(logMsg, {
         ip: req.ip
