@@ -1,6 +1,6 @@
-import { core, IServiceResult } from '../../../core/index.js'
-import { IStockItemDb } from '../interfaces/i-stock-item-db.js'
-import { v1StockRepository } from '../repositories/index.js'
+import { core, IServiceResult } from '../../../../core/index.js'
+import { IStockItemDb } from '../../interfaces/i-stock-item-db.js'
+import { v1StockRepository } from '../../repositories/index.js'
 
 interface IServiceGetAll {
   page: number

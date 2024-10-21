@@ -6,7 +6,7 @@ import { validation } from './schema.js'
 export async function getById(req: Request, res: Response): Promise<void> {
   const { id } = validation.parse(req.params)
 
-  const serviceResult = await v1StockServices.getStockItemById({ id })
+  const serviceResult = await v1StockServices.getById({ id })
 
   const apiResponse: IResponseJson = {
     okay: true,

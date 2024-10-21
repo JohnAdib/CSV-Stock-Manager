@@ -6,7 +6,7 @@ import { validation } from './schema.js'
 export async function insertItem(req: Request, res: Response): Promise<void> {
   const item = validation.parse(req.body)
 
-  const serviceResult = await v1StockServices.saveStockItem({ item })
+  const serviceResult = await v1StockServices.saveItem({ item })
 
   const statusCode = 201
   const apiResponse: IResponseJson = {

@@ -5,7 +5,7 @@ import { insertItem } from './insert-item/index.js'
 import { updateItem } from './update-item/index.js'
 import { uploadCsv } from './upload-csv/index.js'
 
-export const v1Stock = {
+export const v1StockController = {
   getAll,
   uploadCsv,
   getById,

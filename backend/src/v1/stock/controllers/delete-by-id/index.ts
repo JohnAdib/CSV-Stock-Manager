@@ -6,7 +6,7 @@ import { validation } from './schema.js'
 export async function deleteById(req: Request, res: Response): Promise<void> {
   const { id } = validation.parse(req.params)
 
-  const serviceResult = await v1StockServices.deleteStockItemById({ id })
+  const serviceResult = await v1StockServices.deleteById({ id })
 
   const statusCode = 200
   const apiResponse: IResponseJson = {

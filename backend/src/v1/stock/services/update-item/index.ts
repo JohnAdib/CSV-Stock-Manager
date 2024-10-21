@@ -1,14 +1,14 @@
-import { core, IServiceResult } from '../../../core/index.js'
-import { IStockItemUpdate } from '../interfaces/index.js'
-import { v1StockRepository } from '../repositories/index.js'
+import { core, IServiceResult } from '../../../../core/index.js'
+import { IStockItemUpdate } from '../../interfaces/index.js'
+import { v1StockRepository } from '../../repositories/index.js'
 
-interface IServiceUpdateStockItem {
+interface IServiceUpdateItem {
   item: IStockItemUpdate
 }
 
-export async function updateStockItem({
+export async function updateItem({
   item
-}: IServiceUpdateStockItem): Promise<IServiceResult<IStockItemUpdate>> {
+}: IServiceUpdateItem): Promise<IServiceResult<IStockItemUpdate>> {
   // check the new sku is unique
   const existingItem = await v1StockRepository.stock.read.getStockItemBySku({
     sku: item.sku
