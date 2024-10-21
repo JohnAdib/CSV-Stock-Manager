@@ -3,10 +3,7 @@ import { IResponseJson } from '../../../../core/index.js'
 import { v1StockServices } from '../../services/index.js'
 import { validation } from './schema.js'
 
-export async function deleteByIdController(
-  req: Request,
-  res: Response
-): Promise<void> {
+export async function deleteById(req: Request, res: Response): Promise<void> {
   const { id } = validation.parse(req.params)
 
   const serviceResult = await v1StockServices.deleteStockItemById({ id })

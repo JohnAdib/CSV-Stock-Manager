@@ -3,10 +3,7 @@ import { IResponseJson } from '../../../../core/index.js'
 import { v1StockServices } from '../../services/index.js'
 import { validation } from './schema.js'
 
-export async function getAllController(
-  req: Request,
-  res: Response
-): Promise<void> {
+export async function getAll(req: Request, res: Response): Promise<void> {
   const { page, limit } = validation.parse(req.query)
 
   const serviceResult = await v1StockServices.getAll({ page, limit })
