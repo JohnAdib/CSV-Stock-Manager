@@ -3,13 +3,10 @@ import { IResponseJson } from '../../../../core/index.js'
 import { v1StockServices } from '../../services/index.js'
 import { validation } from './schema.js'
 
-export async function updateItemController(
-  req: Request,
-  res: Response
-): Promise<void> {
+export async function updateItem(req: Request, res: Response): Promise<void> {
   const item = validation.parse(req.body)
 
-  const serviceResult = await v1StockServices.updateStockItem({ item })
+  const serviceResult = await v1StockServices.updateItem({ item })
 
   const statusCode = 200
   const apiResponse: IResponseJson = {

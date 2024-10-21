@@ -1,8 +1,7 @@
-import { csvParser } from '../../../core/helpers/csv-parser/index.js'
-import { IServiceResult } from '../../../core/index.js'
-import { IStockItemAdd, IStockItemSaveResult } from '../interfaces/index.js'
-import { v1StockRepository } from '../repositories/index.js'
-import { filterValidStockItems } from '../utils/filter-valid-stock-items.js'
+import { core, IServiceResult } from '../../../../core/index.js'
+import { IStockItemAdd, IStockItemSaveResult } from '../../interfaces/index.js'
+import { v1StockRepository } from '../../repositories/index.js'
+import { filterValidStockItems } from '../../utils/filter-valid-stock-items.js'
 
 export async function uploadCSV(
   file: Express.Multer.File
@@ -11,7 +10,7 @@ export async function uploadCSV(
   const { originalname, size, path } = file
 
   // parse the CSV file and get the data and errors
-  const { data, errors } = csvParser(path)
+  const { data, errors } = core.helpers.csvParser(path)
 
   // Filter the valid stock items
   const validStockItems = filterValidStockItems(data as IStockItemAdd[])
@@ -32,7 +31,7 @@ export async function uploadCSV(
 
   // Save the stock items to the database
   const dbData: IStockItemSaveResult =
-    await v1StockRepository.stock.save.saveStockItems(validStockItems)
+    await v1StockRepository.stock.saveStockItems(validStockItems)
 
   const csvAnalyzedData: IStockItemSaveResult = {
     ...dbData,
