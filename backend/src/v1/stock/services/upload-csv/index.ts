@@ -31,7 +31,7 @@ export async function uploadCSV(
 
   // Save the stock items to the database
   const dbData: IStockItemSaveResult =
-    await v1StockRepository.stock.save.saveStockItems(validStockItems)
+    await v1StockRepository.stock.saveStockItems(validStockItems)
 
   const csvAnalyzedData: IStockItemSaveResult = {
     ...dbData,

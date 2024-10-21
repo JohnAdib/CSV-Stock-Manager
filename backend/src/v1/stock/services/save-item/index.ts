@@ -10,8 +10,7 @@ interface IServiceSaveItem {
 export async function saveItem({
   item
 }: IServiceSaveItem): Promise<IServiceResult<IStockItemDb>> {
-  const dbData: IStockItemDb =
-    await v1StockRepository.stock.save.saveStockItem(item)
+  const dbData: IStockItemDb = await v1StockRepository.stock.saveStockItem(item)
 
   const apiResponse: IServiceResult<IStockItemDb> = {
     data: dbData

@@ -13,23 +13,15 @@ import { updateStockItem } from './stock/update/update-stock-item.js'
 export const v1StockRepository = {
   csv: { addCsvFile },
   stock: {
-    delete: {
-      deleteStockItemById,
-      deleteAllStockItems
-    },
-    read: {
-      getStockItemById,
-      getStockItemBySku,
-      getStockItems,
-      getStockItemsCounts
-    },
-    save: {
-      saveStockItem,
-      saveStockItems
-    },
-    update: {
-      updateStockItemPartial,
-      updateStockItem
-    }
+    deleteStockItemById,
+    deleteAllStockItems,
+    getStockItemById,
+    getStockItemBySku,
+    getStockItems,
+    getStockItemsCounts,
+    saveStockItem,
+    saveStockItems,
+    updateStockItemPartial,
+    updateStockItem
   }
 }

@@ -11,14 +11,12 @@ export async function getAll({
   page,
   limit
 }: IServiceGetAll): Promise<IServiceResult<IStockItemDb>> {
-  const totalItemsCount =
-    await v1StockRepository.stock.read.getStockItemsCounts()
+  const totalItemsCount = await v1StockRepository.stock.getStockItemsCounts()
 
-  const dbData: IStockItemDb[] =
-    await v1StockRepository.stock.read.getStockItems({
-      page,
-      limit
-    })
+  const dbData: IStockItemDb[] = await v1StockRepository.stock.getStockItems({
+    page,
+    limit
+  })
 
   const apiResponse: IServiceResult<IStockItemDb> = core.helpers.paginate({
     data: dbData,

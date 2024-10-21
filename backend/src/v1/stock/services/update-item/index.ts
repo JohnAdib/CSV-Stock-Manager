@@ -10,7 +10,7 @@ export async function updateItem({
   item
 }: IServiceUpdateItem): Promise<IServiceResult<IStockItemUpdate>> {
   // check the new sku is unique
-  const existingItem = await v1StockRepository.stock.read.getStockItemBySku({
+  const existingItem = await v1StockRepository.stock.getStockItemBySku({
     sku: item.sku
   })
   // if user try to change to new sku that already exists
@@ -21,7 +21,7 @@ export async function updateItem({
   }
 
   const dbData: IStockItemUpdate =
-    await v1StockRepository.stock.update.updateStockItem(item)
+    await v1StockRepository.stock.updateStockItem(item)
 
   const apiResponse: IServiceResult<IStockItemUpdate> = {
     data: dbData

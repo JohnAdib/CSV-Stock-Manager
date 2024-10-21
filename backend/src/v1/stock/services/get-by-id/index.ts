@@ -9,10 +9,9 @@ interface IServiceGetById {
 export async function getById({
   id
 }: IServiceGetById): Promise<IServiceResult<IStockItemDb>> {
-  const dbData: IStockItemDb =
-    await v1StockRepository.stock.read.getStockItemById({
-      id
-    })
+  const dbData: IStockItemDb = await v1StockRepository.stock.getStockItemById({
+    id
+  })
 
   const apiResponse: IServiceResult<IStockItemDb> = {
     data: dbData
